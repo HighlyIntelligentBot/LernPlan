@@ -22,10 +22,29 @@ def remaining_time(exdate, today):
     return remdays
 
 
+def get_data(modname):
+    """Gets the progress from the files saved in the folder. You can modify
+        these files ("info todo.txt", "sys done.txt") to modify the topics
+        and lectures.
+    Args: modname (str): Name of the module
+
+    Returns: lst1, lst2 (lists): First lists contains the topics that are
+        to be done and the second list contains the done topics.
+    """
+    todolst = "_".join([modname, "todo.txt"])
+    with open(todolst) as f:
+        lst1 = f.read().splitlines()
+    donelst = "_".join([modname, "done.txt"])
+    with open(donelst) as g:
+        lst2 = g.read().splitlines()
+    return lst1, lst2
+
+
 def main():
     print("Hallo!")
     print("Bitte wählen:")
     print("Verbleibende Tage Zeigen[V]")
+    print("Verbleibenden [S]toff zeigen")
     print("Verlassen[Q]")
     # main Loop
     while True:
@@ -55,6 +74,68 @@ def main():
             print(remaining_time(mathedate, today))
         elif inp == 'V ti' or inp == 'v ti':
             print(remaining_time(tidate, today))
+        elif inp == 'S' or 's':
+            print("Welches Modul?")
+            print("[i]nfo, [s]ysteme, [m]athe, [t]i")
+            intop = input(">")
+            if intop == "i":
+                todo, done = get_data("info")
+                print("TODO:")
+                if len(todo) == 0:
+                    print("Alles geschafft!")
+                else:
+                    for i in range(len(todo)):
+                        print(str(i) + " " + todo[i])
+                print("DONE:")
+                if len(done) == 0:
+                    print("Noch nichts geschafft!")
+                else:
+                    for i in range(len(done)):
+                        print(str(i) + " " + done[i])
+            elif intop == "s":
+                todo, done = get_data("info")
+                print("TODO:")
+                if len(todo) == 0:
+                    print("Alles geschafft!")
+                else:
+                    for i in range(len(todo)):
+                        print(str(i) + " " + todo[i])
+                print("DONE:")
+                if len(done) == 0:
+                    print("Noch nichts geschafft!")
+                else:
+                    for i in range(len(done)):
+                        print(str(i) + " " + done[i])
+            elif intop == "m":
+                todo, done = get_data("info")
+                print("TODO:")
+                if len(todo) == 0:
+                    print("Alles geschafft!")
+                else:
+                    for i in range(len(todo)):
+                        print(str(i) + " " + todo[i])
+                print("DONE:")
+                if len(done) == 0:
+                    print("Noch nichts geschafft!")
+                else:
+                    for i in range(len(done)):
+                        print(str(i) + " " + done[i])
+            elif intop == "t":
+                todo, done = get_data("info")
+                print("TODO:")
+                if len(todo) == 0:
+                    print("Alles geschafft!")
+                else:
+                    for i in range(len(todo)):
+                        print(str(i) + " " + todo[i])
+                print("DONE:")
+                if len(done) == 0:
+                    print("Noch nichts geschafft!")
+                else:
+                    for i in range(len(done)):
+                        print(str(i) + " " + done[i])
+            elif intop == 'q:':
+                break
         elif inp == 'q' or inp == 'Q':
             sys.exit()
         else:
