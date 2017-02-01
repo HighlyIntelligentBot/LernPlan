@@ -1,0 +1,10 @@
+0: Willkommen
+1: Aufbau von Rechnern
+2: Überblick Betriebssysteme
+3: Dateisysteme
+4: Prozesse
+5: Nebenläufigkeit
+6: Deadlocks
+7: Scheduling
+8: Speicherverwaltung
+9: Sicherheit (1)
