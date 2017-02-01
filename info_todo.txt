@@ -1,0 +1,26 @@
+Grundlagen
+Erste Schritte in Python
+Werte, Typen, Variablen, Ausdrücke
+Funktionen: Aufrufe und Definitionen
+Bedingungen, bedingte Ausführung und While-Schleifen
+Python-Programme schreiben, kommentieren, starten und entwickeln
+Endliche Automaten
+Spieltheorie
+Rekursion
+Sequenzen, For-Schleifen und Objekte und Identität
+Bäume
+Programmentwicklung: Testen und Debuggen
+Dictionaries & Mengen
+Funktionsaufrufe & Ausnahmebehandlung
+Ein-/Ausgabe: String-Literale
+Brainf*ck
+Objekt-orientierte Programmierung: Einstieg
+OOP: Aggregierung, Properties, Operator-Überladung und magische Klassen
+Berufsethik
+OOP: RoboRally als Beispiel
+Klassenmethoden, Klassen und Typen, Standardmethoden für Sequenzen und Strings
+Reguläre Ausdrücke
+Das WWW befragen
+Effiziente Programme
+Laufzeitanalyse von Algorithmen
+Funktionale Programmierung in Python
