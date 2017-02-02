@@ -116,7 +116,7 @@ def main():
                     print("=============")
                     print(remaining_time(mathdate, today).days)
                     lst1, lst2 = get_data('mathe')
-                    stamtag = len(lst1)/int(remaining_time(mathedate, today).days)
+                    stamtag = len(lst1)/int(remaining_time(mathdate, today).days)
                     print("TODO: %f Vorlesungen pro Tag" % (stamtag))
                     print("=============")
                 elif inex == 'q' or inex == 'Q':
@@ -141,7 +141,7 @@ def main():
             print("=============")
             print(remaining_time(mathdate, today).days)
             lst1, lst2 = get_data('mathe')
-            stamtag = len(lst1)/int(remaining_time(mathedate, today).days)
+            stamtag = len(lst1)/int(remaining_time(mathdate, today).days)
             print("TODO: %f Vorlesungen pro Tag" % (stamtag))
             print("=============")
         elif inp == 'V ti' or inp == 'v ti':
