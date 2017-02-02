@@ -1,7 +1,5 @@
 import datetime
 import sys
-from tkinter import *
-
 
 infodate = datetime.date(2017, 2, 27)
 tidate = datetime.date(2017, 3, 29)
@@ -58,20 +56,27 @@ def change_data(modname, num, undo=False):
         donelst.append(todolst[num])
         del todolst[num]
         todofname = "_".join([modname, "todo.txt"])
+        donefname = "_".join([modname, "done.txt"])
+        with open(todofname, "w") as f:
+            f.write("\n".join(todolst))
+        with open(donefname, "w") as g:
+            g.write("\n".join(donelst))
+    elif undo is True:
+        todolst, donelst = get_data(modname)
+        todolst.append(donelst[num])
+        del donelst[num]
+        todofname = "_".join([modname, "todo.txt"])
+        donefname = "_".join([modname, "done.txt"])
         with open(todofname, "w") as f:
             for i in range(len(todolst)):
-                f.write(todolst[i])
+                f.write("\n".join(todolst))
         with open(donefname, "w") as g:
             for n in range(len(donelst)):
-                g.write(donelst[i])
+                g.write("\n".join(donelst))
 
-
-def callback():
-    text.insert
 
 
 def main():
-    """
     print("Hallo!")
     print("Bitte wählen:")
     print("Verbleibende Tage Zeigen[V]")
@@ -81,115 +86,285 @@ def main():
     while True:
         inp = input('>')
         if inp == 'V' or inp == 'v':
-            print("Welche Klausur?")
-            print("ti, info, sys, mathe")
-            print('Or [q] to quit')
-            inex = input('>')
-            if inex == 'ti':
-                print(remaining_time(tidate, today))
-            elif inex == 'info':
-                print(remaining_time(infodate, today))
-                continue
-            elif inex == 'sys':
-                print(remaining_time(sysdate, today))
-            elif inex == 'mathe':
-                print(remaining_time(mathdate, today))
-            elif inex == 'q' or inex == 'Q':
-                break
-            else:
-                print('Unzulaegisse Eingabe')
+            while True:
+                print("Welche Klausur?")
+                print("ti, info, sys, mathe")
+                print('Or [q] to quit')
+                inex = input('>')
+                if inex == 'ti':
+                    print("=============")
+                    print(remaining_time(tidate, today).days)
+                    lst1, lst2 = get_data('ti')
+                    stamtag = len(lst1)/int(remaining_time(tidate, today).days)
+                    print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+                    print("=============")
+                elif inex == 'info':
+                    print("=============")
+                    print(remaining_time(infodate, today).days)
+                    lst1, lst2 = get_data('info')
+                    stamtag = len(lst1)/int(remaining_time(infodate, today).days)
+                    print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+                    print("=============")
+                elif inex == 'sys':
+                    print("=============")
+                    print(remaining_time(sysdate, today).days)
+                    lst1, lst2 = get_data('sys')
+                    stamtag = len(lst1)/int(remaining_time(sysdate, today).days)
+                    print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+                    print("=============")
+                elif inex == 'mathe':
+                    print("=============")
+                    print(remaining_time(mathdate, today).days)
+                    lst1, lst2 = get_data('mathe')
+                    stamtag = len(lst1)/int(remaining_time(mathedate, today).days)
+                    print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+                    print("=============")
+                elif inex == 'q' or inex == 'Q':
+                    break
+                else:
+                    print('Unzulaegisse Eingabe')
         elif inp == 'V info' or inp == 'v info':
-            print(remaining_time(infodate, today))
+            print("=============")
+            print(remaining_time(infodate, today).days)
+            lst1, lst2 = get_data('info')
+            stamtag = len(lst1)/int(remaining_time(infodate, today).days)
+            print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+            print("=============")
         elif inp == 'V sys' or inp == 'v sys':
-            print(remaining_time(sysdate, today))
+            print("=============")
+            print(remaining_time(sysdate, today).days)
+            lst1, lst2 = get_data('sys')
+            stamtag = len(lst1)/int(remaining_time(sysdate, today).days)
+            print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+            print("=============")
         elif inp == 'V mathe' or inp == 'v mathe':
-            print(remaining_time(mathedate, today))
+            print("=============")
+            print(remaining_time(mathdate, today).days)
+            lst1, lst2 = get_data('mathe')
+            stamtag = len(lst1)/int(remaining_time(mathedate, today).days)
+            print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+            print("=============")
         elif inp == 'V ti' or inp == 'v ti':
-            print(remaining_time(tidate, today))
-        elif inp == 'S' or 's':
-            print("Welches Modul?")
-            print("[i]nfo, [s]ysteme, [m]athe, [t]i")
-            intop = input(">")
-            if intop == "i":
-                todo, done = get_data("info")
-                print("TODO:")
-                if len(todo) == 0:
-                    print("Alles geschafft!")
+            print("=============")
+            print(remaining_time(tidate, today).days)
+            lst1, lst2 = get_data('ti')
+            stamtag = len(lst1)/int(remaining_time(tidate, today).days)
+            print("TODO: %f Vorlesungen pro Tag" % (stamtag))
+            print("=============")
+        elif inp == 'S' or inp == 's':
+            while True:
+                print("Welches Modul?")
+                print("[i]nfo, [s]ysteme, [m]athe, [t]i")
+                intop = input(">")
+                if intop == "i":
+                    todo, done = get_data("info")
+                    print("TODO:")
+                    if len(todo) == 0:
+                        print("Alles geschafft!")
+                    else:
+                        for i in range(len(todo)):
+                            print(str(i) + " " + todo[i])
+                    print("DONE:")
+                    if len(done) == 0:
+                        print("Noch nichts geschafft!")
+                    else:
+                        for i in range(len(done)):
+                            print(str(i) + " " + done[i])
+                    print("Vorlesungen abhaken?[j/n/u]")
+                    inpchck = input("[j/n/u]>")
+                    if inpchck == "j" or inpchck == "J":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("info", int(inpnum))
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                    elif inpchck == "n" or inpchck == "N":
+                        break
+                    elif inpchck == "u" or inpchck == "U":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("info", int(inpnum), undo=True)
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                elif intop == "s":
+                    todo, done = get_data("sys")
+                    print("TODO:")
+                    if len(todo) == 0:
+                        print("Alles geschafft!")
+                    else:
+                        for i in range(len(todo)):
+                            print(str(i) + " " + todo[i])
+                    print("DONE:")
+                    if len(done) == 0:
+                        print("Noch nichts geschafft!")
+                    else:
+                        for i in range(len(done)):
+                            print(str(i) + " " + done[i])
+                    print("Vorlesungen abhaken?[j/n/u]")
+                    inpchck = input("[j/n/u]>")
+                    if inpchck == "j" or inpchck == "J":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("sys", int(inpnum))
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                    elif inpchck == "n" or inpchck == "N":
+                        break
+                    elif inpchck == "u" or inpchck == "U":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("sys", int(inpnum), undo=True)
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                elif intop == "m":
+                    todo, done = get_data("mathe")
+                    print("TODO:")
+                    if len(todo) == 0:
+                        print("Alles geschafft!")
+                    else:
+                        for i in range(len(todo)):
+                            print(str(i) + " " + todo[i])
+                    print("DONE:")
+                    if len(done) == 0:
+                        print("Noch nichts geschafft!")
+                    else:
+                        for i in range(len(done)):
+                            print(str(i) + " " + done[i])
+                    print("Vorlesungen abhaken?[j/n/u]")
+                    inpchck = input("[j/n/u]>")
+                    if inpchck == "j" or inpchck == "J":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("mathe", int(inpnum))
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                    elif inpchck == "n" or inpchck == "N":
+                        break
+                    elif inpchck == "u" or inpchck == "U":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("mathe", int(inpnum))
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                elif intop == "t":
+                    todo, done = get_data("ti")
+                    print("TODO:")
+                    if len(todo) == 0:
+                        print("Alles geschafft!")
+                    else:
+                        for i in range(len(todo)):
+                            print(str(i) + " " + todo[i])
+                    print("DONE:")
+                    if len(done) == 0:
+                        print("Noch nichts geschafft!")
+                    else:
+                        for i in range(len(done)):
+                            print(str(i) + " " + done[i])
+                    print("Vorlesungen abhaken?[j/n/u]")
+                    inpchck = input("[j/n/u]>")
+                    if inpchck == "j" or inpchck == "J":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("ti", int(inpnum))
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                    elif inpchck == "n" or inpchck == "N":
+                        break
+                    elif inpchck == "u" or inpchck == "U":
+                        print("Welche?")
+                        inpnum = input(">")
+                        change_data("ti", int(inpnum))
+                        print("TODO:")
+                        if len(todo) == 0:
+                            print("Alles geschafft!")
+                        else:
+                            for i in range(len(todo)):
+                                print(str(i) + " " + todo[i])
+                        print("DONE:")
+                        if len(done) == 0:
+                            print("Noch nichts geschafft!")
+                        else:
+                            for i in range(len(done)):
+                                print(str(i) + " " + done[i])
+                elif intop == 'q' or intop == "Q":
+                    break
                 else:
-                    for i in range(len(todo)):
-                        print(str(i) + " " + todo[i])
-                print("DONE:")
-                if len(done) == 0:
-                    print("Noch nichts geschafft!")
-                else:
-                    for i in range(len(done)):
-                        print(str(i) + " " + done[i])
-            elif intop == "s":
-                todo, done = get_data("info")
-                print("TODO:")
-                if len(todo) == 0:
-                    print("Alles geschafft!")
-                else:
-                    for i in range(len(todo)):
-                        print(str(i) + " " + todo[i])
-                print("DONE:")
-                if len(done) == 0:
-                    print("Noch nichts geschafft!")
-                else:
-                    for i in range(len(done)):
-                        print(str(i) + " " + done[i])
-            elif intop == "m":
-                todo, done = get_data("info")
-                print("TODO:")
-                if len(todo) == 0:
-                    print("Alles geschafft!")
-                else:
-                    for i in range(len(todo)):
-                        print(str(i) + " " + todo[i])
-                print("DONE:")
-                if len(done) == 0:
-                    print("Noch nichts geschafft!")
-                else:
-                    for i in range(len(done)):
-                        print(str(i) + " " + done[i])
-            elif intop == "t":
-                todo, done = get_data("info")
-                print("TODO:")
-                if len(todo) == 0:
-                    print("Alles geschafft!")
-                else:
-                    for i in range(len(todo)):
-                        print(str(i) + " " + todo[i])
-                print("DONE:")
-                if len(done) == 0:
-                    print("Noch nichts geschafft!")
-                else:
-                    for i in range(len(done)):
-                        print(str(i) + " " + done[i])
-            elif intop == 'q:':
-                break
+                    print("Unzulaessige Eingabe")
         elif inp == 'q' or inp == 'Q':
             break
             sys.exit()
         else:
             print("Unzulässige Eingabe")
-"""
-    root = Tk()
-    root.title('LernPlan')
-    root.geometry('500x500')
-    root.resizable(width=False, height=False)
-    frame = Frame(root)
-    frame.pack()
-    hi = Label(frame, text="Hallo!", font="Times 24 bold")
-    hi.pack(anchor=N)
-    btn1 = Button(frame, text="Tage bis Klausur", font="Times 16 bold",
-                  command=callback)
-    btn1.pack(side=LEFT)
-    btnexit = Button(frame, text="Exit", command=frame.quit,
-                     font="Times 16 bold")
-    btnexit.pack()
-    text = Text(frame, height=)
-    root.mainloop()
 
 
 if __name__ == '__main__':
