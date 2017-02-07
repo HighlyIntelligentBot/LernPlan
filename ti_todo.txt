@@ -25,3 +25,4 @@
 8.1: VLSI Entwurf
 8.2: Rechnerarchitektur
 8.2b: Speicherhierarchie
+9.0: Security
