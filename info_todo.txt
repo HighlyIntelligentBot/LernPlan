@@ -1,7 +1,7 @@
 Grundlagen
 Erste Schritte in Python
-Werte, Typen, Variablen, Ausdrücke
 Funktionen: Aufrufe und Definitionen
+Werte, Typen, Variablen, Ausdrücke
 Bedingungen, bedingte Ausführung und While-Schleifen
 Python-Programme schreiben, kommentieren, starten und entwickeln
 Endliche Automaten
@@ -24,3 +24,6 @@ Das WWW befragen
 Effiziente Programme
 Laufzeitanalyse von Algorithmen
 Funktionale Programmierung in Python
+Iteratoren und Generatoren
+Constraint Satisfaction/Propagierung und Backtracking
+Eine kurze Geschichte der Informatik
