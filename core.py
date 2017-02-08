@@ -10,7 +10,7 @@ today = datetime.date.fromtimestamp(time.time())
 
 
 def date_to_str(date):
-    return "%.d.%d.%d" % (date.day, date.month, date.year)
+    return "%d.%d.%d" % (date.day, date.month, date.year)
 
 
 def remaining_time(exdate):
